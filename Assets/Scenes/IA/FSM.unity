@@ -231,10 +231,13 @@ MonoBehaviour:
   edgeColor: {r: 0, g: 1, b: 0, a: 1}
   withoutDetect: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 0.36078432}
   withDetect: {r: 1, g: 0, b: 0, a: 0.36862746}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8192
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 1970524690}
+    m_Bits: 4096
+  visibleTargets: []
 --- !u!114 &269779556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +341,6 @@ MonoBehaviour:
   _fleeSpeed: 4
   _rotSpeed: 4
   healthForFlee: 9
-  hasChased: 0
 --- !u!114 &269779560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,10 +717,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 751974497494241193, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 969299676902313720, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -760,28 +758,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7405698199135352505, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 7405698199135352505, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9124825593416304219, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_Color.b
-      value: 0.011764765
-      objectReference: {fileID: 0}
-    - target: {fileID: 9124825593416304219, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9124825593416304219, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9124825593416304219, guid: 7c9beb876f4f6fa4bbbc5e231370069e, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -8,7 +8,7 @@ public class CharacterController : MonoBehaviour , IDestroyable
     private float _speed;
 
     private SystemHealth _systemHealth;
-
+    private float _speedMultiplier;
 
     private void Awake()
     {
@@ -29,6 +29,11 @@ public class CharacterController : MonoBehaviour , IDestroyable
     private void Update()
     {
         FollowMouse();
+
+        if (Input.GetMouseButton(0))
+            _speedMultiplier*=2;
+        else
+            _speedMultiplier = 1;
     }
 
     public void FollowMouse()
@@ -37,7 +42,7 @@ public class CharacterController : MonoBehaviour , IDestroyable
         mousePosition.z = transform.position.z; // Mantener la coordenada Z
 
         // Velocidad constante sin importar la distancia
-        transform.position = Vector2.MoveTowards(transform.position, mousePosition, _speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, mousePosition, _speed * _speedMultiplier* Time.deltaTime);
 
         // Rotación
         Vector2 direction = ((Vector2)mousePosition - (Vector2)transform.position).normalized;
@@ -53,5 +58,8 @@ public class CharacterController : MonoBehaviour , IDestroyable
 
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, transform.right * 5);
+    }
 }

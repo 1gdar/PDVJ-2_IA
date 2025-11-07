@@ -48,7 +48,7 @@ public class InSightView : MonoBehaviour
                 visibleTargets.Add(currentTarget);
         }
 
-        currentTarget = null;
+
     }
 
     public bool IsInSight()

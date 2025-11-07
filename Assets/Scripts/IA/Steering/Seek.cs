@@ -1,34 +1,45 @@
 using UnityEngine;
-
-
 public class Seek : SteeringBehaviour 
 {
 
     [SerializeField]
-    private float steeringPower;
+    private float _steeringPower;
+    private Vector2 seekDir;
 
-    public override Vector3 SteeringDir => CalculateSteering();
-
-
-    private Vector3 CalculateSteering()
+    public Vector3 CalculateSteering()
     {
+        Vector2 originPos = transform.position;
+        Vector2 targetPos = _target.position;
 
-        Vector3 desiredDirection = _target.position - transform.position;
+        seekDir = targetPos - originPos;
 
-        float distance = desiredDirection.magnitude;
+        Vector3 steer = seekDir.normalized * _maxSpeed;
+        steer *= _steeringPower;
 
-        // Fuera del radio - velocidad normal
-        desiredDirection = desiredDirection.normalized * _maxSpeed;
-        Vector3 steer = desiredDirection - velocity;
-
-        steer *= steeringPower;
-
-        ///Nos va a retornar una direcccion
         return steer;
-
+    }
+    public override Vector3 Direction
+    {
+        get
+        {
+           return CalculateSteering();
+        }
     }
 
-   
+    private void OnDrawGizmos()
+    {
+        if (_target == null)
+            return;
+
+        Vector3 origin = transform.position;
+        Vector3 desiredDir  = _target.position - transform.position;
+
+        // Asumimos que desiredDirection ya fue calculada en CalculateSeekDir()
+
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(origin,origin + desiredDir);
+    }
 
 
 }

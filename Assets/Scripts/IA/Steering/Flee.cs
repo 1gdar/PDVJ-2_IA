@@ -1,16 +1,21 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class Flee : SteeringBehaviour
 {
-  
-    public override Vector3 SteeringDir => CalculateSteering();
+    [SerializeField]
+    private float steeringPower;
+
+    public override Vector3 Direction => CalculateSteering();
 
    
     private Vector3 CalculateSteering()
     {
-        // Dirección opuesta al target
-        Vector3 fleeDir = (transform.position - _target.position.normalized);
+        Vector2 originPos = transform.position;
+        Vector2 targetPos = _target.position;
+
+        // Dirección opuesta al target, normalizada
+        Vector2 fleeDir = (originPos - targetPos).normalized;
 
         // Queremos ir a máxima velocidad
         Vector3 desiredVelocity = fleeDir * _maxSpeed;
@@ -18,9 +23,22 @@ public class Flee : SteeringBehaviour
         // Cálculo del steering
         Vector3 steer = desiredVelocity - velocity;
 
-        return steer;
+        return steer * steeringPower;
     }
 
+    private void OnDrawGizmos()
+    {
+        if (_target == null)
+            return;
 
+        Vector3 origin = transform.position;
+        Vector3 dirToTarget = origin - _target.position;
+        float distance = dirToTarget.magnitude;
+
+        // Línea azul: dirección opuesta al target, con longitud igual a la distancia
+        Vector3 fleeDirScaled = dirToTarget.normalized * distance;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + fleeDirScaled);
+    }
 
 }
